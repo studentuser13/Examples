@@ -6,12 +6,45 @@
 
 import javafx.util.Pair;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class DBManager {
+
+    private static final String DB_FOLDER = System.getProperty("user.home") + "/Documents/SnakeGameData";
+    private static final String DB_PATH = DB_FOLDER + "/scores.db";
+
+    public static void ensureDatabaseExists() {
+        File dbDir = new File(DB_FOLDER);
+        if (!dbDir.exists()) dbDir.mkdirs();
+
+        File dbFile = new File(DB_PATH);
+        if (!dbFile.exists()) {
+            try (InputStream in = DBManager.class.getResourceAsStream("/res/scores.db");
+                 OutputStream out = new FileOutputStream(dbFile)) {
+                if (in == null) {
+                    System.err.println("Default scores.db not found in resources!");
+                    return;
+                }
+                byte[] buffer = new byte[4096];
+                int bytesRead;
+                while ((bytesRead = in.read(buffer)) != -1) {
+                    out.write(buffer, 0, bytesRead);
+                }
+                System.out.println("Copied default scores.db to " + DB_PATH);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
     /** public insertHighScore method
      * inserts a given score and name into the database
@@ -28,7 +61,7 @@ public class DBManager {
         Statement stmt = null;
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:scores.db");
+            c = DriverManager.getConnection("jdbc:sqlite:" + DB_PATH);
             c.setAutoCommit(false);
             System.out.println("Opened database successfully");
 
@@ -59,7 +92,7 @@ public class DBManager {
         int[] scores = new int[5];
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:scores.db");
+            c = DriverManager.getConnection("jdbc:sqlite:" + DB_PATH);
             c.setAutoCommit(false);
             System.out.println("Opened database successfully");
 
@@ -93,7 +126,7 @@ public class DBManager {
         int id = 0;
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:scores.db");
+            c = DriverManager.getConnection("jdbc:sqlite:" + DB_PATH);
             c.setAutoCommit(false);
             System.out.println("Opened database successfully");
 
@@ -129,7 +162,7 @@ public class DBManager {
         Statement stmt = null;
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:scores.db");
+            c = DriverManager.getConnection("jdbc:sqlite:" + DB_PATH);
             System.out.println("Opened database successfully");
 
             stmt = c.createStatement();
@@ -155,7 +188,7 @@ public class DBManager {
         Statement stmt = null;
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:scores.db");
+            c = DriverManager.getConnection("jdbc:sqlite:" + DB_PATH);
             c.setAutoCommit(false);
             System.out.println("Opened database successfully");
 

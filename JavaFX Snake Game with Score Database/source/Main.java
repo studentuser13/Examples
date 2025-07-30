@@ -38,7 +38,7 @@ public class Main extends Application {
     public static final int APP_W = 20 * BLOCK_SIZE;
     public static final int APP_H = 15 * BLOCK_SIZE;
     // Background image
-    public final static Image BACKGROUND_IMAGE = new Image("res/BG.png");
+    public final static Image BACKGROUND_IMAGE = new Image(Main.class.getResourceAsStream("/res/BG.png"));
     /** Variables */
     // Game control variables
     private int gameLevel = 1;
@@ -80,6 +80,8 @@ public class Main extends Application {
      //**********************************************/
     @Override
     public void start(Stage primaryStage) throws Exception {
+        DBManager.ensureDatabaseExists();
+
         game = new Scene(getSnakeGame());
         intro = new Scene(new StartScreen().getRoot());
         // Enter game
@@ -213,8 +215,8 @@ public class Main extends Application {
         // --- end of text showing score and game level --- //
 
         // ************ MUTE *************** //
-        Image soundOn =  new Image("res/sound_on.png");
-        Image soundOff =  new Image("res/sound_off.png");
+        Image soundOn =  new Image(Main.class.getResourceAsStream("/res/sound_on.png"));
+        Image soundOff =  new Image(Main.class.getResourceAsStream("/res/sound_off.png"));
         ImageView soundView = new ImageView(soundOn);
         soundView.setFitHeight(30);
         soundView.setPreserveRatio(true);
@@ -432,39 +434,39 @@ public class Main extends Application {
         if (isSoundOn) {
             switch (dir) {
                 case 'U':
-                    AudioClip u = new AudioClip(this.getClass().getResource("res/up.wav").toString());
+                    AudioClip u = new AudioClip(this.getClass().getResource("/res/up.wav").toString());
                     u.play();
                     break;
                 case 'D':
-                    AudioClip d = new AudioClip(this.getClass().getResource("res/down.wav").toString());
+                    AudioClip d = new AudioClip(this.getClass().getResource("/res/down.wav").toString());
                     d.play();
                     break;
                 case 'L':
-                    AudioClip l = new AudioClip(this.getClass().getResource("res/left.wav").toString());
+                    AudioClip l = new AudioClip(this.getClass().getResource("/res/left.wav").toString());
                     l.play();
                     break;
                 case 'R':
-                    AudioClip r = new AudioClip(this.getClass().getResource("res/right.wav").toString());
+                    AudioClip r = new AudioClip(this.getClass().getResource("/res/right.wav").toString());
                     r.play();
                     break;
                 case 'B':
-                    AudioClip b = new AudioClip(this.getClass().getResource("res/bite.wav").toString());
+                    AudioClip b = new AudioClip(this.getClass().getResource("/res/bite.wav").toString());
                     b.play();
                     break;
                 case 'E':
-                    AudioClip e = new AudioClip(this.getClass().getResource("res/ending.wav").toString());
+                    AudioClip e = new AudioClip(this.getClass().getResource("/res/ending.wav").toString());
                     e.play();
                     break;
                 case 'C':
-                    AudioClip c = new AudioClip(this.getClass().getResource("res/crash.wav").toString());
+                    AudioClip c = new AudioClip(this.getClass().getResource("/res/crash.wav").toString());
                     c.play();
                     break;
                 case 'M':
-                    AudioClip m = new AudioClip(this.getClass().getResource("res/move.wav").toString());
+                    AudioClip m = new AudioClip(this.getClass().getResource("/res/move.wav").toString());
                     m.play();
                     break;
                 case 'W':
-                    AudioClip w = new AudioClip(this.getClass().getResource("res/win.wav").toString());
+                    AudioClip w = new AudioClip(this.getClass().getResource("/res/win.wav").toString());
                     w.play();
                     break;
                 default:

@@ -10,7 +10,7 @@ public class Food{
      * ivFood stores an ImageView of imageFood
      * xPos stores an int xPos position
      * yPos stores an int yPos position*/
-    private Image imageFood =  new Image("res/apple.png");
+    private Image imageFood =  new Image(Food.class.getResourceAsStream("/res/apple.png"));
     private ImageView foodView;
     private int xPos, yPos;
 

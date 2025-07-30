@@ -31,14 +31,14 @@ public class StartScreen {
         root.setPrefSize(Main.APP_W, Main.APP_H);
 
         // Logo
-        ImageView logoView = new ImageView(new Image("res/snake.png"));
+        ImageView logoView = new ImageView(new Image(StartScreen.class.getResourceAsStream("/res/snake.png")));
         logoView.setFitHeight(500);
         logoView.setPreserveRatio(true);
         logoView.setLayoutX(40);
         logoView.setLayoutY(40);
 
         // Controls diagram
-        ImageView controlsView = new ImageView(new Image("res/controls.png"));
+        ImageView controlsView = new ImageView(new Image(StartScreen.class.getResourceAsStream("/res/controls.png")));
         controlsView.setFitHeight(100);
         controlsView.setPreserveRatio(true);
         controlsView.setLayoutX(350);
@@ -52,7 +52,7 @@ public class StartScreen {
         keys.setLayoutY(90);
 
         // Play button image
-        ImageView playView = new ImageView(new Image("res/play.png"));
+        ImageView playView = new ImageView(new Image(StartScreen.class.getResourceAsStream("/res/play.png")));
         playView.setFitHeight(150);
         playView.setPreserveRatio(true);
         playView.setLayoutX(320);

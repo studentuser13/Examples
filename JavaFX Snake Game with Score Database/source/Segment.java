@@ -4,11 +4,11 @@ import javafx.scene.image.ImageView;
  * Manages sprites*/
 public class Segment {
 
-    private static Image headUp =  new Image("res/SnakeHead_U.png");
-    private static Image headDown =  new Image("res/SnakeHead_D.png");
-    private static Image headLeft =  new Image("res/SnakeHead_L.png");
-    private static Image headRight =  new Image("res/SnakeHead_R.png");
-    private static Image segment =  new Image("res/segment+.png");
+    private static Image headUp =  new Image(Segment.class.getResourceAsStream("/res/SnakeHead_U.png"));
+    private static Image headDown =  new Image(Segment.class.getResourceAsStream("/res/SnakeHead_D.png"));
+    private static Image headLeft =  new Image(Segment.class.getResourceAsStream("/res/SnakeHead_L.png"));
+    private static Image headRight =  new Image(Segment.class.getResourceAsStream("/res/SnakeHead_R.png"));
+    private static Image segment =  new Image(Segment.class.getResourceAsStream("/res/segment+.png"));
     private static ImageView segmentView = new ImageView(headRight);
 
     /** Public changeSegmentView method
